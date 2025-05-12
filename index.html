@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adblock Detector</title>
+    <title>Document</title>
+    <script>window.adriverCalls = ((Array.isArray(window.adriverCalls) && window.adriverCalls) || []);</script>
+    <script src="https://content.adriver.ru/anti-adblock.js" async></script>
 </head>
 
 <body>
-
-    <!--
-        Многие блокировщики не работают в локальной сети,
-        поэтому нужно загрузить страницу на сервер.
-     -->
-
-    <h1>
-        Результат: <span id="result"></span>
-    </h1>
-
-    <script src="index.js"></script>
-
+    <script src="./index.js"></script>
+    <script>
+        console.log("second script");
+        
+        window.adriverCalls.push(() => {
+            console.log("adriverCalls");
+            
+            window.AdR.create(                                //вызов метода create
+                "aab-vast",
+                "https://www.apple.com/"
+            )
+                .then((module) => {                           //успешная загрузка и вызов - возвращение модуля
+                    console.log("module: ", module);
+                })
+                .catch((error) => {                            //некорректная загрузка и вызов - возвращение ошибки 
+                    console.log("error: ", error);
+                });
+        });
+    </script>
 </body>
 
 </html>
