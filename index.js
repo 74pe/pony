@@ -58,16 +58,6 @@
         }
     }
 
-    function __spreadArray(to, from, pack) {
-        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-            if (ar || !(i in from)) {
-                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-                ar[i] = from[i];
-            }
-        }
-        return to.concat(ar || Array.prototype.slice.call(from));
-    }
-
     typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
         var e = new Error(message);
         return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
@@ -139,11 +129,11 @@
                 callParameters[_i - 1] = arguments[_i];
             }
             return __awaiter(this, void 0, void 0, function () {
-                var _a;
-                return __generator(this, function (_b) {
+                return __generator(this, function (_a) {
+                    console.log("my-create");
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
-                    return [2 /*return*/, new ((_a = storage[productName]).bind.apply(_a, __spreadArray([void 0], callParameters, false)))()];
+                    return [2 /*return*/, storage[productName].apply(storage, callParameters)];
                 });
             });
         }
